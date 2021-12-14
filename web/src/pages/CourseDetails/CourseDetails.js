@@ -9,7 +9,7 @@ import MenuBookIcon from '@mui/icons-material/MenuBook'
 import { Statistics } from './Statistics'
 import Submissions from './Submissions'
 
-const sample = [
+const assignments = [
   {
     id: 1,
     name: 'Quiz 1',
@@ -29,7 +29,7 @@ export function CourseDetails () {
   useEffect(() => {
     axios.get(`/courses/${courseId}`)
       .then(resp => setCourse(resp.data))
-    axios.get(`/courses/${courseId}`)
+    axios.get(`/courses/${courseId}/activities/missed`)
       .then(resp => setMissed(resp.data))
   }, [courseId])
 
@@ -42,14 +42,14 @@ export function CourseDetails () {
         <h2>Missed assignments</h2>
         {missed.length === 0 ? 'No missed assignments!' : (
           <List dense>
-            {sample.map((row) => (
-              <Fragment key={row.id}>
+            {assignments.map((assignment) => (
+              <Fragment key={assignment.id}>
                 <ListItem>
                   <ListItemIcon><MenuBookIcon /></ListItemIcon>
-                  <ListItemText primary={row.name} secondary={row.dueDate} />
+                  <ListItemText primary={assignment.name} secondary={assignment.dueDate} />
                 </ListItem>
                 <List>
-                  {row.people.map((person) => (
+                  {assignment.people.map((person) => (
                     <ListItem key={person.id} sx={{ pl: 4 }}>
                       <ListItemIcon><PersonIcon /></ListItemIcon>
                       <ListItemText primary={person.fullName} />
@@ -65,7 +65,7 @@ export function CourseDetails () {
         <Statistics />
       </Grid>
       <Grid item xs={12}>
-        <h2>Submissions</h2>
+        <h2>Latest submissions</h2>
         <Submissions courseId={courseId} />
       </Grid>
       <Grid item xs={12}>

@@ -12,6 +12,7 @@ import { CourseDetails } from './pages/CourseDetails/CourseDetails'
 import { StudentDetails } from './pages/StudentDetails'
 import { Layout } from './components/Layout'
 import ActivityEdit from './pages/CourseDetails/ActivityEdit'
+import ActivityOverview from './pages/ActivityOverview/ActivityOverview'
 
 const theme = createTheme()
 
@@ -28,6 +29,7 @@ function App () {
                 <Route path=':courseId' element={<CourseDetails />} />
                 <Route path=':courseId/edit' element={<CourseEdit />} />
                 <Route path=':courseId/activities/new' element={<ActivityEdit />} />
+                <Route path=':courseId/activities/:activityId' element={<ActivityOverview />} />
                 <Route path='new' element={<CourseEdit />} />
                 <Route index element={<Courses />} />
               </Route>

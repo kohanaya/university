@@ -9,7 +9,6 @@ export function Layout () {
         <Link to='/'>Home</Link> |{' '}
         <Link to='/courses'>Courses</Link> |{' '}
         <Link to='/students'>Students</Link> |{' '}
-        <Link to='/plagiarism'>Plagiarism Checker</Link> |{' '}
       </nav>
       <hr />
       <Outlet />
