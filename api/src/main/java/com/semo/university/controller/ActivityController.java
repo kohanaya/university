@@ -1,7 +1,7 @@
 package com.semo.university.controller;
 
-import com.semo.university.exception.NotFoundException;
 import com.semo.university.entity.Activity;
+import com.semo.university.exception.NotFoundException;
 import com.semo.university.repository.ActivityRepository;
 import com.semo.university.repository.CourseRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,6 +43,12 @@ public class ActivityController {
     public List<Activity> getAll(
             @PathVariable Long courseId) {
         return activityRepository.findAllByCourseId(courseId);
+    }
+
+    @GetMapping("/activities/missed")
+    public List<Activity> getMissed(
+            @PathVariable Long courseId) {
+        return activityRepository.findAllByCourseIdAndDueDateIsBefore(courseId, Instant.now());
     }
 
     @GetMapping("/activities/{id}")

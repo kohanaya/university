@@ -7,6 +7,7 @@ import { Grid, List, ListItem, ListItemIcon, ListItemText } from '@mui/material'
 import PersonIcon from '@mui/icons-material/Person'
 import MenuBookIcon from '@mui/icons-material/MenuBook'
 import { Statistics } from './Statistics'
+import Submissions from './Submissions'
 
 const sample = [
   {
@@ -61,6 +62,10 @@ export function CourseDetails () {
       </Grid>
       <Grid item xs={12} md={4}>
         <Statistics />
+      </Grid>
+      <Grid item xs={12}>
+        <h2>Submissions</h2>
+        <Submissions courseId={courseId} />
       </Grid>
       <Grid item xs={12}>
         <h2>Enrolled Students</h2>

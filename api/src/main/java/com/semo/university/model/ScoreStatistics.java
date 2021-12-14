@@ -7,10 +7,10 @@ import lombok.Data;
 @Builder
 public class ScoreStatistics {
 
-    private Double lowestScore;
+    private Integer lowestScore;
     private String lowestScoreName;
 
-    private Double highestScore;
+    private Integer highestScore;
     private String highestScoreName;
 
     private Double averageScore;

@@ -8,10 +8,10 @@ create table student
 create table course
 (
     id       int auto_increment primary key,
-    name     varchar(50)            not null,
-    number   varchar(5)             null,
+    name     varchar(50) not null,
+    number   varchar(5) null,
     location enum ('WEB', 'CAMPUS') null,
-    time     varchar(50)            null
+    time     varchar(50) null
 );
 
 create table enrollment
@@ -35,11 +35,11 @@ create table activity
 (
     id           int auto_increment primary key,
     type         enum ('QUIZ', 'ASSIGNMENT', 'EXAM') not null,
-    title        varchar(50)                         not null,
-    max_points   int                                 null,
-    due_date     datetime                            null,
-    instructions text                                null,
-    course_id    int                                 not null,
+    title        varchar(50) not null,
+    max_points   int null,
+    due_date     datetime null,
+    instructions text null,
+    course_id    int         not null,
 
     constraint fk_activity_class
         foreign key (course_id)
@@ -50,10 +50,16 @@ create table activity
 create table submission
 (
     id          int auto_increment primary key,
-    student_id  int  not null,
-    activity_id int  not null,
+    course_id   int not null,
+    activity_id int not null,
+    student_id  int not null,
     document    text null,
-    score       int  null,
+    score       int null,
+
+    constraint fk_submission_course
+        foreign key (course_id)
+            references course (id)
+            on delete cascade,
 
     constraint fk_submission_activity
         foreign key (activity_id)
@@ -112,32 +118,32 @@ values (1, 1, 1), -- Kirsten - CS640
        (7, 3, 3), -- Roy - CS50
        (8, 4, 2); -- James - CS500
 
-insert into submission(id, student_id, activity_id, document, score)
-values (1, 1, 1, 'nkjnkjn', 45),
-       (2, 1, 2, 'oooooo', 95),
-       (3, 1, 3, 'kkkkkk', 80),
-       (4, 1, 4, 'hhhh', 100),
-       (5, 1, 7, 'tttttt', 39),
-       (6, 1, 8, 'hhhhhh', 49),
-       (7, 1, 9, 'gjhgjgh', 90),
-       (8, 1, 10, 'gjgjhg', 50),
-       (9, 1, 11, 'ututut', 95),
-       (10, 2, 1, 'hhhh', 40),
-       (11, 2, 2, 'oooooo', 90),
-       (12, 2, 3, 'kkkkkk', 90),
-       (13, 2, 5, 'hdbgkdb', 50),
-       (14, 2, 6, 'tttttt', 50),
-       (15, 2, 7, 'hhhhhh', 69),
-       (16, 3, 1, 'gjhgjgh', 90),
-       (17, 3, 2, 'gjgjhg', 50),
-       (18, 3, 3, 'ututut', 95),
-       (19, 3, 4, 'ututut', 95),
-       (20, 2, 4, 'kkkkkk', 100),
-       (21, 3, 9, 'gjhgjgh', 40),
-       (22, 3, 10, 'gjgjhg', 40),
-       (23, 3, 11, 'ututut', 90),
-       (24, 4, 5, 'tttttt', 50),
-       (25, 4, 6, 'hhhhhh', 50),
-       (26, 4, 7, 'hhhhhh', 100);
+insert into submission(id, course_id, student_id, activity_id, document, score)
+values (1, 1, 1, 1, 'nkjnkjn', 45),
+       (2, 1, 1, 2, 'oooooo', 95),
+       (3, 1, 1, 3, 'kkkkkk', 80),
+       (4, 1, 1, 4, 'hhhh', 100),
+       (5, 2, 1, 7, 'tttttt', 39),
+       (6, 3, 1, 8, 'hhhhhh', 49),
+       (7, 3, 1, 9, 'gjhgjgh', 90),
+       (8, 3, 1, 10, 'gjgjhg', 50),
+       (9, 3, 1, 11, 'ututut', 95),
+       (10, 1, 2, 1, 'hhhh', 40),
+       (11, 1, 2, 2, 'oooooo', 90),
+       (12, 1, 2, 3, 'kkkkkk', 90),
+       (13, 2, 2, 5, 'hdbgkdb', 50),
+       (14, 2, 2, 6, 'tttttt', 50),
+       (15, 2, 2, 7, 'hhhhhh', 69),
+       (16, 1, 3, 1, 'gjhgjgh', 90),
+       (17, 1, 3, 2, 'gjgjhg', 50),
+       (18, 1, 3, 3, 'ututut', 95),
+       (19, 1, 3, 4, 'ututut', 95),
+       (20, 1, 2, 4, 'kkkkkk', 100),
+       (21, 3, 3, 9, 'gjhgjgh', 40),
+       (22, 3, 3, 10, 'gjgjhg', 40),
+       (23, 3, 3, 11, 'ututut', 90),
+       (24, 2, 4, 5, 'tttttt', 50),
+       (25, 2, 4, 6, 'hhhhhh', 50),
+       (26, 2, 4, 7, 'hhhhhh', 100);
 
 
