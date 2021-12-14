@@ -29,7 +29,8 @@ export function CourseDetails () {
   useEffect(() => {
     axios.get(`/courses/${courseId}`)
       .then(resp => setCourse(resp.data))
-    setMissed({})
+    axios.get(`/courses/${courseId}`)
+      .then(resp => setMissed(resp.data))
   }, [courseId])
 
   return (
